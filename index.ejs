@@ -1,15 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const morgan = require('morgan')
-const path = require('path')
-const ejs = require('ejs')
-const body parser = require('body parser')
+const express = require('express');
+const app = express();
+const port = 3000;
+const router = require('router')
+const morgan = require('morgan');
+const path = require('path');
+const ejs = require('ejs');
+const body parser = require('body parser');
+const mongoose = require('mongoose');
+const user = '' ;
+const password = '' ;
+const uri = '' ;
+await mongoose.connect(uri,
+    {userNewUrlParser: true, useUnifiedTopology : true}
+);
+    .then(()=> console.log('Base de datos conectada'))
+    .catch(e => console.log(e))
 
-
-app.get('/', (req, res) => {
+app.get('/saludo', (req, res) => {
     res.send('¡Hola mundo!')
 })
+app.use('clientes', require(./router/tablas))
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en http://localhost:${port}`)
